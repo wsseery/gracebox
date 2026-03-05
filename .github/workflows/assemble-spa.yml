@@ -1,0 +1,32 @@
+name: Assemble App SPA
+on:
+  workflow_dispatch:
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Assemble and decode
+        run: |
+          python3 << 'PYEOF'
+import gzip, base64, os
+b64 = open(".github/chunks/chunk_01.txt").read() + open(".github/chunks/chunk_02.txt").read() + open(".github/chunks/chunk_03.txt").read() + open(".github/chunks/chunk_04.txt").read() + open(".github/chunks/chunk_05.txt").read() + open(".github/chunks/chunk_06.txt").read() + open(".github/chunks/chunk_07.txt").read() + open(".github/chunks/chunk_08.txt").read() + open(".github/chunks/chunk_09.txt").read() + open(".github/chunks/chunk_10.txt").read()
+data = gzip.decompress(base64.b64decode(b64))
+with open('app/index.html', 'wb') as f:
+    f.write(data)
+print(f'Written {len(data)} bytes to app/index.html')
+PYEOF
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git rm -r .github/chunks/ || true
+          git rm .github/workflows/assemble-spa.yml || true
+          git rm .github/workflows/restore-spa.yml || true
+          git add app/index.html
+          git diff --cached --stat
+          git commit -m "feat: move app SPA to /app/ subdirectory\n\n- App now served from /app/ path, marketing page at root\n- No code changes to the app itself"
+          git push
