@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  ____                 _           _ _
+ |  _ \ ___ _ __ _ __ | | _____  _(_) |_ _   _
+ | |_) / _ \ '__| '_ \| |/ _ \ \/ / | __| | | |
+ |  __/  __/ |  | |_) | |  __/>  <| | |_| |_| |
+ |_|   \___|_|  | .__/|_|\___/_/\_\_|\__|\__, |
+                |_|                       |___/
+  Created with Perplexity Computer
+  https://www.perplexity.ai/computer
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — GraceBox</title>
+<meta name="description" content="GraceBox Terms of Service. Review the terms and conditions governing your use of our AI-powered email civility firewall.">
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1B2A4A;
+  background: #FAF8F5;
+  line-height: 1.65;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ========== DESIGN TOKENS ========== */
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #243558;
+  --navy-dark: #131E36;
+  --gold: #C9A96E;
+  --gold-light: #D4BA86;
+  --gold-dark: #B8955A;
+  --warm-white: #FAF8F5;
+  --warm-white-alt: #F5F2EE;
+  --sage: #7A9E7E;
+  --coral: #D4726A;
+  --text-primary: #1B2A4A;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --border-light: rgba(27, 42, 74, 0.08);
+  --border-medium: rgba(27, 42, 74, 0.12);
+
+  /* Typography Scale */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8125rem);
+  --text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.7rem + 2.5vw, 3.5rem);
+  --text-hero: clamp(2.5rem, 1.8rem + 3.5vw, 4.25rem);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ========== LAYOUT UTILITIES ========== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.container--narrow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: var(--space-3) var(--space-8);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 180ms var(--ease-out);
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--gold);
+  color: var(--navy-dark);
+  box-shadow: 0 2px 8px rgba(201, 169, 110, 0.3);
+}
+
+.btn--primary:hover {
+  background: var(--gold-dark);
+  box-shadow: 0 4px 16px rgba(201, 169, 110, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--warm-white);
+  border: 1.5px solid rgba(250, 248, 245, 0.3);
+}
+
+.btn--secondary:hover {
+  border-color: rgba(250, 248, 245, 0.6);
+  background: rgba(250, 248, 245, 0.05);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--border-medium);
+}
+
+.btn--outline:hover {
+  border-color: var(--gold);
+  background: rgba(201, 169, 110, 0.05);
+}
+
+.btn--large {
+  font-size: var(--text-base);
+  padding: var(--space-4) var(--space-10);
+  border-radius: 10px;
+}
+
+/* ========== NAVIGATION ========== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: var(--space-4) 0;
+  transition: all 300ms var(--ease-smooth);
+  background: rgba(27, 42, 74, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--warm-white);
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-lg);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+}
+
+.nav__links a {
+  color: rgba(250, 248, 245, 0.7);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: color 180ms var(--ease-out);
+}
+
+.nav__links a:hover {
+  color: var(--warm-white);
+}
+
+.nav__cta {
+  font-size: var(--text-xs) !important;
+  padding: var(--space-2) var(--space-5) !important;
+  background: var(--gold) !important;
+  color: var(--navy-dark) !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: background 180ms var(--ease-out) !important;
+}
+
+.nav__cta:hover {
+  background: var(--gold-dark) !important;
+}
+
+.nav__mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+.nav__mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--warm-white);
+  margin: 5px 0;
+  transition: all 200ms var(--ease-out);
+}
+
+/* ========== LEGAL PAGE HERO ========== */
+.legal-hero {
+  background: var(--navy);
+  padding: var(--space-32) 0 var(--space-16);
+  text-align: center;
+  position: relative;
+}
+
+.legal-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201, 169, 110, 0.06), transparent),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
+  pointer-events: none;
+}
+
+.legal-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.2), transparent);
+}
+
+.legal-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.legal-hero__title {
+  font-size: var(--text-3xl);
+  color: var(--warm-white);
+  margin-bottom: var(--space-4);
+}
+
+.legal-hero__updated {
+  font-size: var(--text-sm);
+  color: rgba(250, 248, 245, 0.5);
+  font-weight: 400;
+}
+
+/* ========== LEGAL CONTENT ========== */
+.legal-content {
+  padding: var(--space-20) 0 var(--space-24);
+}
+
+.legal-content__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.legal-content h2 {
+  font-size: var(--text-xl);
+  color: var(--navy);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content p {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: var(--space-5);
+}
+
+.legal-content ul {
+  list-style: none;
+  margin-bottom: var(--space-5);
+  padding-left: var(--space-5);
+}
+
+.legal-content ul li {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: var(--space-2);
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+.legal-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.legal-content strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.legal-content a {
+  color: var(--gold-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 180ms var(--ease-out);
+}
+
+.legal-content a:hover {
+  color: var(--gold);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--navy-dark);
+  padding: var(--space-12) 0 var(--space-8);
+  color: rgba(250, 248, 245, 0.5);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: var(--space-10);
+  margin-bottom: var(--space-10);
+}
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--warm-white);
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer__col-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.7);
+  margin-bottom: var(--space-4);
+}
+
+.footer__links {
+  list-style: none;
+}
+
+.footer__links li {
+  margin-bottom: var(--space-2);
+}
+
+.footer__links a {
+  font-size: var(--text-sm);
+  color: rgba(250, 248, 245, 0.5);
+  transition: color 180ms var(--ease-out);
+}
+
+.footer__links a:hover {
+  color: var(--gold);
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(250, 248, 245, 0.06);
+  font-size: var(--text-xs);
+}
+
+.footer__bottom a {
+  color: rgba(250, 248, 245, 0.4);
+  transition: color 180ms var(--ease-out);
+}
+
+.footer__bottom a:hover {
+  color: var(--gold);
+}
+
+/* ========== SCROLL TO TOP ========== */
+.scroll-top {
+  position: fixed;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  color: var(--warm-white);
+  border: 1px solid rgba(250, 248, 245, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms var(--ease-out);
+  z-index: 50;
+}
+
+.scroll-top--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-top:hover {
+  background: var(--navy-light);
+  border-color: rgba(201, 169, 110, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__links {
+    display: none;
+  }
+  
+  .nav__mobile-toggle {
+    display: block;
+  }
+  
+  .nav--mobile-open .nav__links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--navy-dark);
+    padding: var(--space-6);
+    gap: var(--space-4);
+    border-bottom: 1px solid rgba(250,248,245,0.06);
+  }
+
+  .legal-hero {
+    padding: var(--space-24) 0 var(--space-12);
+  }
+
+  .legal-content {
+    padding: var(--space-12) 0 var(--space-16);
+  }
+
+  .legal-content h2 {
+    margin-top: var(--space-10);
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  
+  .footer__bottom {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<header>
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="GraceBox — Home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="3" y="8" width="26" height="18" rx="3" stroke="#C9A96E" stroke-width="1.5"/>
+        <path d="M3 11l13 8 13-8" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 5c-2 2-3.5 4.5-1.5 7" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M22 5c1.5 2.5 1 5-1.5 7" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="5" r="1" fill="#7A9E7E"/>
+      </svg>
+      GraceBox
+    </a>
+    <ul class="nav__links">
+      <li><a href="/#how-it-works">How It Works</a></li>
+      <li><a href="/#benefits">Benefits</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/app/" class="nav__cta">Get Started</a></li>
+    </ul>
+    <button class="nav__mobile-toggle" aria-label="Toggle menu" onclick="document.getElementById('nav').classList.toggle('nav--mobile-open')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+</header>
+
+<main>
+
+<!-- ===== LEGAL HERO ===== -->
+<section class="legal-hero">
+  <div class="container legal-hero__content">
+    <h1 class="legal-hero__title">Terms of Service</h1>
+    <p class="legal-hero__updated">Last updated: March 5, 2026</p>
+  </div>
+</section>
+
+<!-- ===== LEGAL CONTENT ===== -->
+<section class="legal-content">
+  <div class="legal-content__inner">
+
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using GraceBox ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the Service.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>GraceBox is an AI-powered email screening and rewriting service that integrates with Gmail. It screens emails from senders you designate, analyzes tone, and rewrites hostile or hurtful messages into professional, constructive language before delivering them to your inbox.</p>
+
+    <h2>3. Account &amp; Authentication</h2>
+    <p>To use GraceBox, you must authenticate with a valid Google account. You are responsible for maintaining the security of your account credentials and for all activity that occurs under your account.</p>
+    <p>You agree to notify us immediately of any unauthorized use of your account or any other breach of security.</p>
+
+    <h2>4. Gmail Access</h2>
+    <p>By connecting your Gmail account, you grant GraceBox permission to:</p>
+    <ul>
+      <li>Read and modify emails from your screened senders</li>
+      <li>Create and manage the "GraceBox Originals" label in your Gmail account</li>
+      <li>Insert rewritten emails into your inbox</li>
+    </ul>
+    <p>You can revoke GraceBox's access to your Gmail at any time through your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Google Account permissions</a> settings. Revoking access will stop all email processing immediately.</p>
+
+    <h2>5. Subscription &amp; Billing</h2>
+    <ul>
+      <li><strong>Free tier:</strong> 1 screened sender, 25 emails/month</li>
+      <li><strong>Paid plans:</strong> Billed monthly through Stripe</li>
+    </ul>
+    <p>You may cancel your subscription at any time. Upon cancellation, you will retain access to your current plan through the end of the current billing period. No refunds will be issued for partial months.</p>
+
+    <h2>6. AI-Powered Rewriting</h2>
+    <p>GraceBox uses AI (powered by OpenAI) to analyze email tone and rewrite messages. While we strive for accuracy and fidelity to the original message's factual content, please be aware that:</p>
+    <ul>
+      <li>AI-generated content may not always perfectly capture the original sender's intent</li>
+      <li>Rewrites are intended to remove hostile tone while preserving factual information</li>
+      <li>Original emails are always preserved in the "GraceBox Originals" folder for your reference</li>
+    </ul>
+    <p>You agree that rewrites are provided "as-is" and that you should refer to original emails when exact wording is critical.</p>
+
+    <h2>7. Acceptable Use</h2>
+    <p>You agree not to use GraceBox to:</p>
+    <ul>
+      <li>Circumvent legal communications, including court orders, legal notices, or official government correspondence</li>
+      <li>Harass, deceive, or mislead others using rewritten content</li>
+      <li>Process emails in violation of any applicable local, state, national, or international law</li>
+      <li>Reverse-engineer, decompile, or attempt to extract the source code of the Service</li>
+      <li>Interfere with or disrupt the integrity or performance of the Service</li>
+    </ul>
+
+    <h2>8. Limitation of Liability</h2>
+    <p>GraceBox is provided "as is" and "as available" without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+    <p>In no event shall GraceBox, its officers, directors, employees, or agents be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, missed emails, inaccurate rewrites, or service interruptions, arising out of or related to your use of the Service.</p>
+
+    <h2>9. Termination</h2>
+    <p>We may suspend or terminate your access to GraceBox at any time for violation of these Terms of Service or at our discretion with reasonable notice. Upon termination:</p>
+    <ul>
+      <li>Your right to use the Service will immediately cease</li>
+      <li>We may delete your account data after a reasonable retention period</li>
+      <li>Original emails in your Gmail account will not be affected</li>
+    </ul>
+
+    <h2>10. Governing Law</h2>
+    <p>These Terms of Service shall be governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising from these terms shall be resolved in the courts of competent jurisdiction.</p>
+
+    <h2>11. Contact Us</h2>
+    <p>If you have questions about these Terms of Service, please contact us:</p>
+    <ul>
+      <li>General inquiries: <a href="mailto:info@gracebox.app">info@gracebox.app</a></li>
+      <li>Support: <a href="mailto:support@gracebox.app">support@gracebox.app</a></li>
+    </ul>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="8" width="26" height="18" rx="3" stroke="#C9A96E" stroke-width="1.5"/>
+            <path d="M3 11l13 8 13-8" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 5c-2 2-3.5 4.5-1.5 7" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M22 5c1.5 2.5 1 5-1.5 7" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="22" cy="5" r="1" fill="#7A9E7E"/>
+          </svg>
+          GraceBox
+        </div>
+        <p class="footer__tagline">Where every message arrives with grace. An AI-powered email civility firewall.</p>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Product</h4>
+        <ul class="footer__links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+          <li><a href="/#benefits">Benefits</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Resources</h4>
+        <ul class="footer__links">
+          <li><a href="/app/">Launch App</a></li>
+          <li><a href="/app/#demo">Try Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Legal</h4>
+        <ul class="footer__links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__col-title">Contact</h4>
+        <ul class="footer__links">
+          <li><a href="mailto:info@gracebox.app">info@gracebox.app</a></li>
+          <li><a href="mailto:support@gracebox.app">support@gracebox.app</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 GraceBox. All rights reserved.</span>
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<script>
+(function() {
+  // Scroll to top button
+  var scrollTopBtn = document.getElementById('scrollTop');
+  
+  function updateScrollTop() {
+    if (window.scrollY > 400) {
+      scrollTopBtn.classList.add('scroll-top--visible');
+    } else {
+      scrollTopBtn.classList.remove('scroll-top--visible');
+    }
+  }
+  
+  window.addEventListener('scroll', updateScrollTop, { passive: true });
+  updateScrollTop();
+  
+  scrollTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Mobile menu toggle
+  var nav = document.getElementById('nav');
+})();
+</script>
+
+</body>
+</html>
