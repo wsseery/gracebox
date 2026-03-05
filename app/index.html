@@ -527,6 +527,7 @@ const res = await fetch(API_BASE + '/auth/me?user_id=' + encodeURIComponent(user
 if (!res.ok) throw new Error('Could not verify session');
 currentUser = await res.json();
 currentUser.id = userId;
+localStorage.setItem('gracebox_user_id', userId);
 window.history.replaceState({}, '', window.location.pathname + '#dashboard');
 showToast('Welcome to GraceBox!', 'success');
 return true;
@@ -543,6 +544,7 @@ currentUser = null;
 screenedSenders = [];
 emailLogs = [];
 statsData = null;
+localStorage.removeItem('gracebox_user_id');
 navigate('login');
 showLogin();
 }
@@ -623,7 +625,7 @@ apiGet(API_BASE + '/stats?user_id=' + currentUser.id),
 apiGet(API_BASE + '/senders?user_id=' + currentUser.id)
 ]);
 statsData = stats;
-screenedSenders = sendersData.senders || [];
+screenedSenders = Array.isArray(sendersData) ? sendersData : (sendersData.senders || []);
 document.getElementById('welcome-msg').textContent = 'Welcome back, ' + (currentUser.name || 'there');
 const tierName = TIERS[currentUser.subscription_tier]?.name || 'Free';
 document.getElementById('header-tier').textContent = tierName + ' Plan';
@@ -876,12 +878,12 @@ const dot = document.getElementById('gmail-status-dot');
 const text = document.getElementById('gmail-status-text');
 const btn = document.getElementById('gmail-connect-btn');
 const desc = document.getElementById('gmail-status-desc');
-if (currentUser.gmail_label_id) {
+if (currentUser.gmail_label_id || currentUser.gmail_connected) {
 dot.className = 'status-dot connected';
 text.textContent = 'Connected (' + (currentUser.email || '') + ')';
 text.style.color = 'var(--sage)';
 btn.textContent = 'Reconnect Gmail';
-desc.textContent = 'Your Gmail is connected. The GraceBox Originals label has been created.';
+desc.textContent = 'Your Gmail is connected.' + (currentUser.gmail_label_id ? ' The GraceBox Originals label has been created.' : '');
 } else {
 dot.className = 'status-dot disconnected';
 text.textContent = 'Not Connected';
@@ -1326,6 +1328,26 @@ if (oauthHandled) {
 showAppShell();
 handleRoute();
 return;
+}
+// Try restoring session from localStorage
+const savedUserId = localStorage.getItem('gracebox_user_id');
+if (!currentUser && savedUserId) {
+try {
+const res = await fetch(API_BASE + '/auth/me?user_id=' + encodeURIComponent(savedUserId));
+if (res.ok) {
+currentUser = await res.json();
+currentUser.id = savedUserId;
+showAppShell();
+handleRoute();
+if (window._pendingCheckoutSession) {
+setTimeout(() => {
+handleCheckoutSuccess(window._pendingCheckoutSession);
+window._pendingCheckoutSession = null;
+}, 500);
+}
+return;
+} else { localStorage.removeItem('gracebox_user_id'); }
+} catch(e) { localStorage.removeItem('gracebox_user_id'); }
 }
 const hash = getHash();
 if (!currentUser && hash !== 'demo') {
