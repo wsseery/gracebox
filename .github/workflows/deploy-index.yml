@@ -1,0 +1,43 @@
+name: Deploy index.html from temporary store
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          
+      - name: Fetch index.html from temporary store
+        run: |
+          curl -s "https://paste.c-net.org/HairlineUsually" | python3 -c "
+          import sys
+          from urllib.parse import unquote_plus
+          data = sys.stdin.read()
+          if data.startswith('content='):
+              data = data[8:]
+          decoded = unquote_plus(data)
+          print(f'File size: {len(decoded)} chars', flush=True)
+          with open('index.html', 'w', encoding='utf-8') as f:
+              f.write(decoded)
+          print('index.html written successfully', flush=True)
+          "
+          
+      - name: Verify file
+        run: |
+          wc -c index.html
+          head -3 index.html
+          
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add index.html
+          git diff --staged --stat
+          git commit -m "Update marketing page with embedded optimized images"
+          git push origin main
