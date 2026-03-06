@@ -885,6 +885,35 @@
 
     .sender-inactive { opacity: 0.45; }
 
+    /* TOGGLE SWITCH */
+    .toggle-wrap { display: flex; align-items: center; gap: 6px; }
+    .toggle-label { font-size: 10.5px; color: var(--text-muted); white-space: nowrap; }
+    .toggle {
+      position: relative;
+      width: 34px;
+      height: 18px;
+      background: var(--gray-muted);
+      border-radius: 9px;
+      border: 1.5px solid var(--surface-border);
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .toggle.on { background: var(--sage); border-color: var(--sage); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      transition: var(--transition);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .toggle.on::after { left: 16px; }
+
     /* ACTIVITY LOG */
     .log-list { display: flex; flex-direction: column; gap: 6px; }
 
@@ -1986,14 +2015,21 @@
           ${senders.length ? `
           <div class="sender-list">
             ${senders.map(s => `
-              <div class="sender-item ${s.is_active ? '' : 'sender-inactive'}">
+              <div class="sender-item" style="opacity:${s.is_active ? '1' : '0.55'}">
                 <div class="sender-avatar">${escHtml(getInitials(s.sender_name, s.sender_email))}</div>
                 <div style="flex:1;min-width:0">
                   <div class="sender-name">${escHtml(s.sender_name || s.sender_email || '—')}</div>
                   <div class="sender-email">${escHtml(s.sender_email || '')}</div>
                 </div>
                 <div class="sender-count">${formatNum(s.emails_screened_count ?? 0)} emails</div>
-                <div style="margin-left:8px">${s.is_active ? `<span style="font-size:10.5px;color:var(--sage);font-weight:600">Active</span>` : `<span style="font-size:10.5px;color:var(--gray)">Paused</span>`}</div>
+                <div class="toggle-wrap" style="margin-left:8px">
+                  <span class="toggle-label">Active</span>
+                  <div class="toggle ${s.is_active ? 'on' : ''}" data-sender-id="${escHtml(s.id)}" data-field="is_active" onclick="App.toggleSender(this)"></div>
+                </div>
+                <div class="toggle-wrap" style="margin-left:4px">
+                  <span class="toggle-label">Send Copy</span>
+                  <div class="toggle ${s.notify_sender ? 'on' : ''}" data-sender-id="${escHtml(s.id)}" data-field="notify_sender" onclick="App.toggleSender(this)"></div>
+                </div>
               </div>
             `).join('')}
           </div>` : `<div class="empty-panel" style="padding:16px 0 0">No screened senders yet.</div>`}
@@ -2033,6 +2069,38 @@
       `;
 
       document.getElementById('panel-body').innerHTML = html;
+    },
+
+    /* Toggle a sender field (is_active or notify_sender) */
+    async toggleSender(el) {
+      const senderId = el.dataset.senderId;
+      const field = el.dataset.field;
+      const isOn = el.classList.contains('on');
+      const newVal = isOn ? 0 : 1;
+
+      // Optimistic UI
+      el.classList.toggle('on');
+
+      // Update row opacity if toggling is_active
+      if (field === 'is_active') {
+        const row = el.closest('.sender-item');
+        if (row) row.style.opacity = newVal ? '1' : '0.55';
+      }
+
+      try {
+        const body = {};
+        body[field] = newVal;
+        await apiCall('PATCH', `/api/senders?id=${encodeURIComponent(senderId)}`, body);
+        toast(`${field === 'is_active' ? 'Active' : 'Send Copy'} ${newVal ? 'enabled' : 'disabled'}.`, 'success');
+      } catch (err) {
+        // Revert on failure
+        el.classList.toggle('on');
+        if (field === 'is_active') {
+          const row = el.closest('.sender-item');
+          if (row) row.style.opacity = isOn ? '1' : '0.55';
+        }
+        toast('Failed to update sender: ' + err.message, 'error');
+      }
     },
 
     /* Save subscriber edits */
