@@ -1262,6 +1262,164 @@
       background: var(--surface-border);
       margin: 4px 0;
     }
+
+    /* ==========================================
+       CHANGE LOG BADGES
+    ========================================== */
+    .change-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .change-badge.upgrade       { background: var(--sage-muted); color: #5a8560; }
+    .change-badge.downgrade     { background: var(--coral-muted); color: #b84d45; }
+    .change-badge.cancellation  { background: var(--coral-muted); color: #b84d45; }
+    .change-badge.status_change { background: var(--gold-muted); color: #9a7235; }
+    .change-badge.reactivation  { background: var(--sage-muted); color: #5a8560; }
+
+    .change-arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin: 0 2px;
+    }
+
+    /* ==========================================
+       BACKUPS VIEW
+    ========================================== */
+    .backup-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(27,42,74,0.05);
+      transition: background var(--transition);
+    }
+    .backup-item:last-child { border-bottom: none; }
+    .backup-item:hover { background: rgba(201,169,110,0.04); }
+
+    .backup-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .backup-info { flex: 1; min-width: 0; }
+    .backup-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+    .backup-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .backup-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--surface-border);
+      color: var(--text-secondary);
+      background: var(--surface);
+      transition: all var(--transition);
+    }
+    .btn-icon:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: white;
+    }
+    .btn-icon.danger:hover {
+      border-color: var(--coral);
+      color: var(--coral);
+      background: var(--coral-muted);
+    }
+
+    .btn-action {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition);
+    }
+    .btn-action.primary {
+      background: var(--navy);
+      color: white;
+    }
+    .btn-action.primary:hover { background: var(--navy-light); }
+
+    /* ==========================================
+       CHANGES TIMELINE (in detail panel)
+    ========================================== */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 34px;
+      bottom: -2px;
+      width: 1.5px;
+      background: var(--surface-border);
+    }
+    .timeline-dot {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+    .timeline-dot.upgrade      { background: var(--sage-muted); color: var(--sage); }
+    .timeline-dot.downgrade    { background: var(--coral-muted); color: var(--coral); }
+    .timeline-dot.cancellation { background: var(--coral-muted); color: var(--coral); }
+    .timeline-dot.status_change { background: var(--gold-muted); color: var(--gold); }
+    .timeline-content { flex: 1; min-width: 0; }
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .timeline-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
@@ -1336,6 +1494,8 @@
       <div class="nav-tabs">
         <button class="nav-tab active" data-view="dashboard" onclick="App.switchView('dashboard')">Dashboard</button>
         <button class="nav-tab" data-view="subscribers" onclick="App.switchView('subscribers')">Subscribers</button>
+        <button class="nav-tab" data-view="changes" onclick="App.switchView('changes')">Changes</button>
+        <button class="nav-tab" data-view="backups" onclick="App.switchView('backups')">Backups</button>
       </div>
 
       <div class="nav-actions">
@@ -1375,6 +1535,76 @@
           <div class="tier-card"><div class="tier-dot personal">P</div><div class="tier-info"><div class="tier-name">Personal</div><div class="tier-count">—</div></div></div>
           <div class="tier-card"><div class="tier-dot professional">P</div><div class="tier-info"><div class="tier-name">Professional</div><div class="tier-count">—</div></div></div>
           <div class="tier-card"><div class="tier-dot team">T</div><div class="tier-info"><div class="tier-name">Team</div><div class="tier-count">—</div></div></div>
+        </div>
+      </div>
+
+      <!-- CHANGES VIEW -->
+      <div id="view-changes" class="hidden">
+        <div class="page-header">
+          <div class="page-title">Subscription Changes</div>
+          <div class="page-subtitle">Recent upgrades, downgrades, and cancellations across all users</div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">Change Log</div>
+            <span class="section-count" id="changes-count">&mdash;</span>
+            <div class="toolbar">
+              <button class="btn-refresh" onclick="App.loadChanges()">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M14 8A6 6 0 112.6 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Type</th>
+                  <th>From</th>
+                  <th></th>
+                  <th>To</th>
+                  <th>Note</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="changes-tbody">
+                <tr><td colspan="7" class="table-empty">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BACKUPS VIEW -->
+      <div id="view-backups" class="hidden">
+        <div class="page-header" style="display:flex;align-items:center;gap:16px">
+          <div style="flex:1">
+            <div class="page-title">Database Backups</div>
+            <div class="page-subtitle">Point-in-time snapshots created before every Stripe webhook</div>
+          </div>
+          <button class="btn-action primary" onclick="App.createBackup()">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Create Backup
+          </button>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">Snapshots</div>
+            <span class="section-count" id="backups-count">&mdash;</span>
+            <div class="toolbar">
+              <button class="btn-refresh" onclick="App.loadBackups()">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M14 8A6 6 0 112.6 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Refresh
+              </button>
+            </div>
+          </div>
+          <div id="backups-list">
+            <div class="table-empty">Loading...</div>
+          </div>
         </div>
       </div>
 
@@ -1492,6 +1722,8 @@
     pendingDeleteId: null,
     pendingDeleteName: '',
     statsData: null,
+    changesLoaded: false,
+    backupsLoaded: false,
   };
 
   /* ==========================================
@@ -1693,13 +1925,21 @@
     /* Switch main view */
     switchView(view) {
       state.currentView = view;
-      document.getElementById('view-dashboard').classList.toggle('hidden', view !== 'dashboard');
-      document.getElementById('view-subscribers').classList.toggle('hidden', view !== 'subscribers');
+      ['dashboard', 'subscribers', 'changes', 'backups'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        if (el) el.classList.toggle('hidden', view !== v);
+      });
       document.querySelectorAll('.nav-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.view === view);
       });
       if (view === 'subscribers' && state.subscribers.length === 0) {
         this.loadSubscribers();
+      }
+      if (view === 'changes' && !state.changesLoaded) {
+        this.loadChanges();
+      }
+      if (view === 'backups' && !state.backupsLoaded) {
+        this.loadBackups();
       }
     },
 
@@ -1910,9 +2150,10 @@
 
     renderDetail(d) {
       const u = d.user || d;
-      const stats = d.stats || {};
+      const stats = d.summary_stats || d.stats || {};
       const senders = d.screened_senders || [];
-      const logs = d.recent_logs || [];
+      const logs = d.recent_email_logs || d.recent_logs || [];
+      const changes = d.subscription_changes || [];
 
       document.getElementById('panel-title').textContent = u.name || u.email || 'Subscriber';
 
@@ -2055,6 +2296,33 @@
           </div>` : `<div class="empty-panel" style="padding:16px 0 0">No recent activity.</div>`}
         </div>
 
+        <!-- SUBSCRIPTION CHANGES -->
+        <div class="detail-card">
+          <div class="detail-card-title">Subscription Changes (${escHtml(String(changes.length))})</div>
+          ${changes.length ? `
+          <div class="timeline">
+            ${changes.map(c => {
+              const icon = c.change_type === 'upgrade' ? '&#9650;' :
+                           c.change_type === 'downgrade' ? '&#9660;' :
+                           c.change_type === 'cancellation' ? '&#10005;' : '&#9679;';
+              return `
+                <div class="timeline-item">
+                  <div class="timeline-dot ${escHtml(c.change_type)}">${icon}</div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">
+                      <span class="change-badge ${escHtml(c.change_type)}">${escHtml(c.change_type)}</span>
+                    </div>
+                    <div class="timeline-desc">
+                      ${tierBadge(c.old_tier)} <span class="change-arrow">&rarr;</span> ${tierBadge(c.new_tier)}
+                      ${c.note ? ` &mdash; ${escHtml(c.note)}` : ''}
+                    </div>
+                    <div class="timeline-time">${formatDate(c.created_at)} &middot; ${escHtml(String(c.emails_used_at_change ?? 0))} emails used at time of change</div>
+                  </div>
+                </div>`;
+            }).join('')}
+          </div>` : `<div class="empty-panel" style="padding:16px 0 0">No subscription changes yet.</div>`}
+        </div>
+
         <!-- DELETE -->
         <div class="detail-card" style="border-color:rgba(212,114,106,0.25)">
           <div class="detail-card-title" style="color:var(--coral)">Danger Zone</div>
@@ -2133,6 +2401,146 @@
         toast('Failed to save: ' + err.message, 'error');
         btn.disabled = false;
         btn.textContent = 'Save Changes';
+      }
+    },
+
+    /* =========================================
+       SUBSCRIPTION CHANGES VIEW
+    ========================================= */
+    async loadChanges() {
+      try {
+        const data = await apiCall('GET', '/api/admin/stats');
+        const changes = data.recent_subscription_changes || [];
+        state.changesLoaded = true;
+        this.renderChangesTable(changes);
+      } catch (err) {
+        if (!err.message.includes('Unauthorized')) {
+          toast('Failed to load changes: ' + err.message, 'error');
+        }
+      }
+    },
+
+    renderChangesTable(changes) {
+      const tbody = document.getElementById('changes-tbody');
+      const countEl = document.getElementById('changes-count');
+      countEl.textContent = changes.length + ' recent';
+
+      if (!changes.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="table-empty">
+          <svg class="table-empty-icon" width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 8v4m0 4h.01" stroke="#8A8E99" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#8A8E99" stroke-width="1.5"/></svg>
+          No subscription changes recorded yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = changes.map(c => `
+        <tr${c.user_id ? ` onclick="App.openSubscriber('${escHtml(c.user_id)}')" style="cursor:pointer"` : ''}>
+          <td style="font-size:13px">${escHtml(c.user_email || c.user_id || '—')}</td>
+          <td><span class="change-badge ${escHtml(c.change_type)}">${escHtml(c.change_type)}</span></td>
+          <td>${tierBadge(c.old_tier)}</td>
+          <td><span class="change-arrow">&rarr;</span></td>
+          <td>${tierBadge(c.new_tier)}</td>
+          <td style="font-size:12.5px;color:var(--text-secondary);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(c.note || '')}">${escHtml(c.note || '—')}</td>
+          <td style="color:var(--text-muted);font-size:12.5px;white-space:nowrap">${formatDate(c.created_at)}</td>
+        </tr>
+      `).join('');
+    },
+
+    /* =========================================
+       BACKUPS VIEW
+    ========================================= */
+    async loadBackups() {
+      try {
+        const data = await apiCall('GET', '/api/admin/backups');
+        const backups = data.backups || [];
+        state.backupsLoaded = true;
+        this.renderBackupsList(backups, data.max_kept);
+      } catch (err) {
+        if (!err.message.includes('Unauthorized')) {
+          toast('Failed to load backups: ' + err.message, 'error');
+          document.getElementById('backups-list').innerHTML =
+            `<div class="table-empty">Error loading backups.</div>`;
+        }
+      }
+    },
+
+    renderBackupsList(backups, maxKept) {
+      const countEl = document.getElementById('backups-count');
+      countEl.textContent = `${backups.length} / ${maxKept || 50} max`;
+      const list = document.getElementById('backups-list');
+
+      if (!backups.length) {
+        list.innerHTML = `<div class="table-empty">
+          <svg class="table-empty-icon" width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 8l4 4-4 4" stroke="#8A8E99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6h8M12 12h8M12 18h8" stroke="#8A8E99" stroke-width="1.5" stroke-linecap="round"/></svg>
+          No backups yet. Backups are created automatically before each Stripe webhook.</div>`;
+        return;
+      }
+
+      list.innerHTML = backups.map(b => {
+        // Parse reason from filename: gracebox_YYYYMMDD_HHMMSS_reason.db
+        const parts = b.filename.replace('.db', '').split('_');
+        const reason = parts.slice(3).join(' ').replace(/\./g, '.') || 'manual';
+        return `
+          <div class="backup-item">
+            <div class="backup-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="#C9A96E" stroke-width="1.5" stroke-linejoin="round"/><path d="M17 21v-8H7v8M7 3v5h8" stroke="#C9A96E" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="backup-info">
+              <div class="backup-name">${escHtml(b.filename)}</div>
+              <div class="backup-meta">${b.size_mb} MB &middot; ${formatDate(b.created)} &middot; ${escHtml(reason)}</div>
+            </div>
+            <div class="backup-actions">
+              <button class="btn-icon" onclick="App.downloadBackup('${escHtml(b.filename)}')" title="Download">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="btn-icon danger" onclick="App.deleteBackup('${escHtml(b.filename)}')" title="Delete">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 5h10M6 5V3.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V5m2 0l-.7 8.4a1 1 0 01-1 .9H5.7a1 1 0 01-1-.9L4 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>`;
+      }).join('');
+    },
+
+    async createBackup() {
+      try {
+        const data = await apiCall('POST', '/api/admin/backups', { reason: 'manual_admin_ui' });
+        toast('Backup created: ' + (data.filename || 'success'), 'success');
+        this.loadBackups();
+      } catch (err) {
+        toast('Failed to create backup: ' + err.message, 'error');
+      }
+    },
+
+    downloadBackup(filename) {
+      // Build download URL with admin key in header via fetch+blob
+      fetch(BASE_URL + '/api/admin/backups/' + encodeURIComponent(filename), {
+        headers: { 'X-Admin-Key': state.adminKey || '' },
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Download failed');
+        return res.blob();
+      })
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        toast('Download started.', 'success');
+      })
+      .catch(err => toast('Download failed: ' + err.message, 'error'));
+    },
+
+    async deleteBackup(filename) {
+      if (!confirm('Delete backup "' + filename + '"? This cannot be undone.')) return;
+      try {
+        await apiCall('DELETE', '/api/admin/backups/' + encodeURIComponent(filename));
+        toast('Backup deleted.', 'success');
+        this.loadBackups();
+      } catch (err) {
+        toast('Failed to delete backup: ' + err.message, 'error');
       }
     },
 
